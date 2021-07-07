@@ -12,5 +12,23 @@
         <name>common-response-headers</name>
         <tag-class>com.zachary.homework.tags.CustomResponseHeadersTag</tag-class>
         <body-content>empty</body-content>
+        <attribute>
+            <name>cacheControl</name>
+            <required>false</required>
+            <rtexprvalue>no-cache</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>pragma</name>
+            <required>false</required>
+            <rtexprvalue>no-cache</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>expires</name>
+            <required>false</required>
+            <rtexprvalue>-1</rtexprvalue>
+            <type>java.lang.Long</type>
+        </attribute>
     </tag>
 </taglib>

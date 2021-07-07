@@ -13,19 +13,19 @@
         <tag-class>com.zachary.homework.tags.CustomResponseHeadersTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>Cache-Control</name>
+            <name>cacheControl</name>
             <required>false</required>
             <rtexprvalue>no-cache</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <name>Pragma</name>
+            <name>pragma</name>
             <required>false</required>
             <rtexprvalue>no-cache</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <name>Expires</name>
+            <name>expires</name>
             <required>false</required>
             <rtexprvalue>-1</rtexprvalue>
             <type>java.lang.Long</type>
