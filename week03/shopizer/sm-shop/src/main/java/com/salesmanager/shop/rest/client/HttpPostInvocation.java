@@ -17,6 +17,19 @@
 package com.salesmanager.shop.rest.client;
 
 import com.salesmanager.shop.rest.core.DefaultResponse;
+import org.apache.http.HttpClientConnection;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HttpContext;
+import org.h2.util.json.JSONObject;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.client.Entity;
@@ -30,6 +43,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -46,13 +60,13 @@ class HttpPostInvocation implements Invocation {
 
     private final URL url;
 
-    private final MultivaluedMap<String, Object> headers;
+//    private final MultivaluedMap<String, Object> headers;
 
     private final Entity<?> bodyEntity;
 
-    HttpPostInvocation(URI uri, MultivaluedMap<String, Object> headers, Entity<?> bodyEntity) {
+    HttpPostInvocation(URI uri, Entity<?> bodyEntity) {
         this.uri = uri;
-        this.headers = headers;
+//        this.headers = headers;
         this.bodyEntity = bodyEntity;
         try {
             this.url = uri.toURL();
@@ -68,19 +82,15 @@ class HttpPostInvocation implements Invocation {
 
     @Override
     public Response invoke() {
-        HttpURLConnection connection = null;
+        RestTemplate restTemplate = null;
         try {
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(HttpMethod.POST);
-            setRequestHeaders(connection);
-            // TODO Set the cookies
-            int statusCode = connection.getResponseCode();
+            restTemplate = new RestTemplate();
+            ResponseEntity responseEntity =
+                    restTemplate.postForEntity(this.uri, this.bodyEntity, DefaultResponse.class);
 //            Response.ResponseBuilder responseBuilder = Response.status(statusCode);
 //
 //            responseBuilder.build();
-            DefaultResponse response = new DefaultResponse();
-            response.setConnection(connection);
-            response.setStatus(statusCode);
+            DefaultResponse response = (DefaultResponse) responseEntity.getBody();
             return response;
 //            Response.Status status = Response.Status.fromStatusCode(statusCode);
 //            switch (status) {
@@ -91,20 +101,21 @@ class HttpPostInvocation implements Invocation {
 //                    break;
 //            }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Error handler
         }
         return null;
     }
 
-    private void setRequestHeaders(HttpURLConnection connection) {
-        for (Map.Entry<String, List<Object>> entry : headers.entrySet()) {
-            String headerName = entry.getKey();
-            for (Object headerValue : entry.getValue()) {
-                connection.setRequestProperty(headerName, headerValue.toString());
-            }
-        }
-    }
+//    private void setRequestHeaders(HttpURLConnection connection) {
+//
+//        for (Map.Entry<String, List<Object>> entry : headers.entrySet()) {
+//            String headerName = entry.getKey();
+//            for (Object headerValue : entry.getValue()) {
+//                connection.setRequestProperty(headerName, headerValue.toString());
+//            }
+//        }
+//    }
 
     @Override
     public <T> T invoke(Class<T> responseType) {
