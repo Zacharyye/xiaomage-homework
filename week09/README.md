@@ -16,9 +16,9 @@
 > 节点删除[delete /zk_test]: Got WatchedEvent state:SyncConnected type:NodeDeleted path:/zk_test for sessionid 0x10186e1f3920006
 > ```
 
-[Zookeeper代码地址]: https://github.com/Zacharyye/xiaomage-homework/blob/main/week09/homework/src/main/java/com/zacharye/homework/zk/Executor.java
+Zookeeper代码：https://github.com/Zacharyye/xiaomage-homework/blob/main/week09/homework/src/main/java/com/zacharye/homework/zk/Executor.java
 
 补充：有尝试熟悉JMX事件监听方式，参考网上资料实现了GC行为监听，但是并未实现分布式事件监听
 
-[GC行为监听代码]: https://github.com/Zacharyye/xiaomage-homework/blob/main/week09/homework/src/main/java/com/zacharye/homework/jmx/GarbageNotificationListener.java
+GC行为监听代码：https://github.com/Zacharyye/xiaomage-homework/blob/main/week09/homework/src/main/java/com/zacharye/homework/jmx/GarbageNotificationListener.java
 
