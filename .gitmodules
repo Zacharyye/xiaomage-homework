@@ -1,0 +1,3 @@
+[submodule "week10/dubbo"]
+	path = week10/dubbo
+	url = git@github.com:Zacharyye/dubbo-bak.git
