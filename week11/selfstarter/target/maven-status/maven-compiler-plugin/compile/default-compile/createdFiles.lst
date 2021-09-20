@@ -1,0 +1,3 @@
+com/zachary/property/HelloServiceProperties.class
+com/zachary/configuration/HelloServiceConfiguration.class
+com/zachary/configuration/HelloServiceAutoConfiguration.class
