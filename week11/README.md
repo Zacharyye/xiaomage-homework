@@ -1,18 +1,12 @@
-## **作业**
+##### **作业**
 
-通过 Dubbo Filter 机制实现 Dubbo 服务提供方限流，利用 resilience4j 来整合实现，具体参考文档:https://resilience4j.readme.io/docs/bulkhead
+利用 Spring Boot 自动装配特性，编写一个自定义 Starter， 规则如下:
 
-1.BulkHead实现限流
+利用 @EnableAutoConfiguration 加载一个自定义 Confugration 类
 
-- 设定1ms内最多允许2个请求通过，其他请求被阻塞，提示如下：
+Configuration 类装配条件需要它非 Web 应用 WebApplicationType = NONE
 
-  `io.github.resilience4j.bulkhead.BulkheadFullException: Bulkhead 'zachary' is full and does not permit further calls`
+Configuration 类中存在一个 @Bean 返回一个输出 HelloWorld ApplicationRunner 对象
 
-2.RateLimiter实现限流
-
-- 设定1分钟内最多允许两个请求通过，其他请求被阻塞，提示如下：
-
-  `io.github.resilience4j.ratelimiter.RequestNotPermitted: RateLimiter 'zachary' does not permit further calls`
-
-过滤器代码地址：https://github.com/Zacharyye/xiaomage-homework/blob/main/week10/dubbo/dubbo-rpc/dubbo-rpc-api/src/main/java/org/apache/dubbo/rpc/filter/RateLimiterFilter.java
+> 启动类：https://github.com/Zacharyye/xiaomage-homework/blob/main/week11/starter/src/main/java/com/zachary/starter/StarterApplication.java
 
